@@ -6,8 +6,8 @@ export interface messageFormat extends pRecord {
     content: string;
 };
 export interface UserAgent {
-    username: string;
-    id: string;
+    username?: string;
+    id?: string;
 }
 export interface messageData {
     id: string;

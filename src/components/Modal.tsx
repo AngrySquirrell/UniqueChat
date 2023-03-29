@@ -7,7 +7,7 @@ interface Props {
     setMState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Modal = ({ mState, setMState}: Props) => {
+const Modal = ({ mState, setMState }: Props) => {
     const email = createRef<HTMLInputElement>();
     const password = createRef<HTMLInputElement>();
 
@@ -15,11 +15,22 @@ const Modal = ({ mState, setMState}: Props) => {
         event
     ) => {
         event.preventDefault();
-        if (!email.current?.value || !password.current?.value) return;
-        await pb.collection('users').authWithPassword(
-           email.current?.value, 
-           password.current?.value
-        );
+        let payload = {
+            email: email.current?.value,
+            password: password.current?.value,
+        };
+        console.log(payload);
+        if (payload.email && payload.password) {
+            await pb
+                .collection("users")
+                .authWithPassword(payload.email, payload.password);
+            
+            setMState(false);
+            return true;
+        } else {
+            alert("Please fill all the fields");
+            return false;
+        }
     };
 
     return (
@@ -44,7 +55,7 @@ const Modal = ({ mState, setMState}: Props) => {
                                     <div className="sInputs">
                                         <label htmlFor="email">E-mail :</label>
                                         <input
-                                            type="email"
+                                            type="text"
                                             name="email"
                                             ref={email}
                                         />

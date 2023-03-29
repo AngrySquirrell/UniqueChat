@@ -2,28 +2,31 @@ import { createRef, useEffect, useState } from "react";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import {
-    collection,
-    message_Data,
-    pocketBaseUrl,
-} from "./scripts/globalVariable";
+import { collection, message_Data } from "./scripts/globalVariable";
 import { messageFormat, UserAgent } from "./scripts/globalInterface";
 import Message from "./components/Message";
 import { useLocalStorage } from "usehooks-ts";
-import pb, { useCollection } from "./scripts/pocketbase";
+import pb, { useAuthStore, useCollection } from "./scripts/pocketbase";
+import Chat from "./components/Chat";
 
 function App() {
     const [id, setID] = useLocalStorage<string>("uuid", "");
-    const ua: UserAgent = { username: "Anonymous", id };
+    const { auth } = useAuthStore();
+    const ua: UserAgent = auth.isValid
+        ? { username: auth.model?.username, id: auth.model?.id }
+        : { username: "Anonymous", id };
     const messageRef = createRef<HTMLInputElement>();
     const {
         records: memory,
         invalidate,
         loading,
     } = useCollection<messageFormat>(collection, [], { realtime: true });
-    console.log(memory)
+
+    console.log(memory);
+
     useEffect(() => {
         !id && setID(crypto.randomUUID());
+
     }, []);
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
@@ -37,31 +40,16 @@ function App() {
             content: `${messageRef.current?.value}`,
         };
         const record = await pb.collection("unique_Chat").create(payload);
-        console.log("Wow")
-        console.log(record)
     };
 
     return (
         <div className="App">
-            <Navbar ua={ua} />
+            <Navbar auth={auth} />
 
             <div className="chatroom">
-                <div className="chat">
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                    <Message messageData={message_Data} ua={ua} />
-                </div>
+
+                <Chat memory={memory} ua={ua} />
+                
                 <div className="textInput">
                     <form onSubmit={handleSubmit}>
                         <input
@@ -97,7 +85,7 @@ function App() {
                     </div>
                 </div>
             </div>
-            
+
             <Footer />
         </div>
     );
