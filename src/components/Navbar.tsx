@@ -29,6 +29,7 @@ const Navbar = ({auth}:Props) => {
                     <div className="farRight">
                         Logged in as : {auth.model?.username}
                         <button
+                        className="signout"
                             onClick={() => {
                                 pb.authStore.clear();
                             }}

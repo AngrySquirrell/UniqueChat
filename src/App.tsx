@@ -15,7 +15,7 @@ function App() {
     const ua: UserAgent = auth.isValid
         ? { username: auth.model?.username, id: auth.model?.id }
         : { username: "Anonymous", id };
-    const messageRef = createRef<HTMLInputElement>();
+    const messageRef = createRef<HTMLTextAreaElement>();
     const {
         records: memory,
         invalidate,
@@ -25,14 +25,10 @@ function App() {
     console.log(memory);
 
     useEffect(() => {
-        !id && setID(crypto.randomUUID());
-
+        !id && setID(`${crypto.getRandomValues(new Uint32Array(1))[0]}`);
     }, []);
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
-        event
-    ) => {
-        event.preventDefault();
+    const handleSubmit = async () => {
         let payload: Partial<messageFormat> = {
             // puts every entry as conditionnal
             authorName: ua.username,
@@ -42,51 +38,48 @@ function App() {
         const record = await pb.collection("unique_Chat").create(payload);
     };
 
+    const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (
+        event
+    ) => {
+        event.preventDefault();
+        handleSubmit();
+        messageRef.current!.value = "";
+    };
+
+    const enterKey: React.KeyboardEventHandler<HTMLTextAreaElement> = (
+        event
+    ) => {
+        if (event.code == "Enter" && event.shiftKey == false) {
+            event.preventDefault();
+            handleSubmit();
+            messageRef.current!.value = "";
+        }
+    };
+
     return (
         <div className="App">
-            <Navbar auth={auth} />
+            <div className="innerApp">
+                <Navbar auth={auth} />
 
-            <div className="chatroom">
+                <div className="chatroom">
+                    <Chat memory={memory} ua={ua} />
 
-                <Chat memory={memory} ua={ua} />
-                
-                <div className="textInput">
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            type="text"
-                            name=""
-                            placeholder="Send a message"
-                            ref={messageRef}
-                        />
-                        <button type="submit">Send</button>
-                    </form>
-                    <div className="testButton">
-                        <button
-                            onClick={() => {
-                                pb.collection("unique_Chat").unsubscribe();
-                            }}
-                        >
-                            Unsubscribe
-                        </button>
-                        <button
-                            onClick={() => {
-                                ua.id = crypto.randomUUID();
-                            }}
-                        >
-                            Change ID
-                        </button>
-                        <button
-                            onClick={() => {
-                                console.log(ua);
-                            }}
-                        >
-                            Output UA
-                        </button>
+                    <div className="textInput">
+                        <form onSubmit={handleFormSubmit} className="">
+                            <textarea
+                                placeholder="Send a message"
+                                ref={messageRef}
+                                value={messageRef.current?.value}
+                                required
+                                spellCheck
+                                onKeyDown={enterKey}
+                            />
+                            <button type="submit">Send</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <Footer />
+                <Footer />
         </div>
     );
 }

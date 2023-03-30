@@ -24,7 +24,7 @@ const Modal = ({ mState, setMState }: Props) => {
             await pb
                 .collection("users")
                 .authWithPassword(payload.email, payload.password);
-            
+
             setMState(false);
             return true;
         } else {
@@ -50,9 +50,35 @@ const Modal = ({ mState, setMState }: Props) => {
                             }}
                         >
                             {
-                                <form onSubmit={handleSubmit}>
-                                    <h1></h1>
-                                    <div className="sInputs">
+                                <div className="container">
+                                    <form onSubmit={handleSubmit}>
+                                        <p>Sign in :</p>
+                                        <input
+                                            type="email"
+                                            placeholder="Email / Username"
+                                        />
+                                        <input
+                                            type="password"
+                                            placeholder="Password"
+                                        />
+                                        <button type="submit">Signin</button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <></>
+            )}
+        </div>
+    );
+};
+
+export default Modal;
+
+{
+    /* <div className="sInputs">
                                         <label htmlFor="email">E-mail :</label>
                                         <input
                                             type="text"
@@ -67,18 +93,5 @@ const Modal = ({ mState, setMState }: Props) => {
                                             name="password"
                                             ref={password}
                                         />
-                                    </div>
-                                    <button type="submit">Signin</button>
-                                </form>
-                            }
-                        </div>
-                    </div>
-                </>
-            ) : (
-                <></>
-            )}
-        </div>
-    );
-};
-
-export default Modal;
+                                    </div> */
+}

@@ -23,7 +23,7 @@ const Chat = ({ memory, ua}: Props) => {
                         <Message isAuthor={ua.id === el.authorID ? "right" : "left"} key={id} messageData={el} ua={ua} />
                 );
             })}
-            <div ref={dummy} ></div>
+            <div ref={dummy} className="dummy" ></div>
         </div>
     );
 };

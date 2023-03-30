@@ -13,6 +13,8 @@
     //background-color: rgba(0,0,0,.3);
     height: 64px;
     width: 100%;
+    padding:  0 16px;
+    box-sizing: border-box;
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(4px);
@@ -23,14 +25,32 @@
     justify-content: space-between;
     align-items: center;
     .right {
-        margin-right: 16px;
+        button {
+
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            padding: 15px 40px;
+            border: none;
+            transition: all 0.2s ease-in-out;
+        }
+        button:hover {
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,255,255, 0.2);
+        }
         .farRight {
             display: flex;
             flex-direction: column;
         }
+        .signout{
+            padding: 4px 8px;;
+        }
     }
     .left {
-        margin-left: 16px;
     }
 }
 
@@ -38,20 +58,37 @@
     position: absolute;
     inset: 0;
     height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.152);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.531);
     // backdrop-filter: blur(5px);
     display: grid;
     place-items: center;
     z-index: 2;
 
     .modal {
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.5);
+        height: 40%;
         color: black;
         padding: 15px;
         z-index: 2;
         border-radius: 5px;
-        animation: modalAppear 0.5s ease-in-out; 
-        
+        animation: modalAppear 0.5s ease-in-out;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            gap: 8px;
+            input {
+                width: 100%;
+                height: 40px;
+                border: none;
+                border-radius: 5px;
+                padding: 4px;
+                outline: none;
+            }
+        }
     }
 }
