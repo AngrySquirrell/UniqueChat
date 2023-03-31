@@ -1,4 +1,4 @@
-@keyframes modalAppear {
+@keyframes Appear {
     0% {
         // transform: scale(0.5);
         opacity: 0;
@@ -13,7 +13,7 @@
     //background-color: rgba(0,0,0,.3);
     height: 64px;
     width: 100%;
-    padding:  0 16px;
+    padding: 0 16px;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -26,7 +26,6 @@
     align-items: center;
     .right {
         button {
-
             background: rgba(255, 255, 255, 0.2);
             border-radius: 4px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -36,18 +35,18 @@
 
             padding: 15px 40px;
             border: none;
-            transition: all 0.2s ease-in-out;
+            transition: Appear 0.2s ease-in-out;
         }
         button:hover {
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255,255,255, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
         .farRight {
             display: flex;
             flex-direction: column;
         }
-        .signout{
-            padding: 4px 8px;;
+        .signout {
+            padding: 4px 8px;
         }
     }
     .left {
@@ -60,7 +59,7 @@
     height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.531);
-    // backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     display: grid;
     place-items: center;
     z-index: 2;
@@ -72,12 +71,12 @@
         padding: 15px;
         z-index: 2;
         border-radius: 5px;
-        animation: modalAppear 0.5s ease-in-out;
+        animation: Appear 0.5s ease-in-out;
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-around;
             height: 100%;
             width: 100%;
             gap: 8px;
@@ -88,6 +87,18 @@
                 border-radius: 5px;
                 padding: 4px;
                 outline: none;
+            }
+            button {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+
+                padding: 15px 40px;
+                border: none;
+                transition: Appear 0.2s ease-in-out;
             }
         }
     }

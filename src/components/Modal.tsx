@@ -11,6 +11,8 @@ const Modal = ({ mState, setMState }: Props) => {
     const email = createRef<HTMLInputElement>();
     const password = createRef<HTMLInputElement>();
 
+    const [error, setError] = React.useState<string | null>(null);
+
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (
         event
     ) => {
@@ -34,8 +36,15 @@ const Modal = ({ mState, setMState }: Props) => {
     };
 
     return (
-        <div>
-            {mState ? (
+        <div
+            onMouseEnter={() => {
+                document.body.style.overflow = "hidden";
+            }}
+            onMouseLeave={() => {
+                document.body.style.overflow = "auto";
+            }}
+        >
+            {mState && (
                 <>
                     <div
                         className="modalContainer"
@@ -51,15 +60,18 @@ const Modal = ({ mState, setMState }: Props) => {
                         >
                             {
                                 <div className="container">
+                                    {error && <p className="error">{error}</p>}
                                     <form onSubmit={handleSubmit}>
                                         <p>Sign in :</p>
                                         <input
-                                            type="email"
+                                            type="text"
                                             placeholder="Email / Username"
+                                            ref={email}
                                         />
                                         <input
                                             type="password"
                                             placeholder="Password"
+                                            ref={password}
                                         />
                                         <button type="submit">Signin</button>
                                     </form>
@@ -68,9 +80,7 @@ const Modal = ({ mState, setMState }: Props) => {
                         </div>
                     </div>
                 </>
-            ) : (
-                <></>
-            )}
+            ) }
         </div>
     );
 };
