@@ -23,7 +23,7 @@ const Navbar = ({auth}:Props) => {
                             setMState(true);
                         }}
                     >
-                        Signin
+                        Sign in
                     </button>
                 ) : (
                     <div className="farRight">
@@ -34,7 +34,7 @@ const Navbar = ({auth}:Props) => {
                                 pb.authStore.clear();
                             }}
                         >
-                            Signout
+                            Sign out
                         </button>
                     </div>
                 )}
