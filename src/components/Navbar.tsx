@@ -22,19 +22,19 @@ const Navbar = ({ auth }: Props) => {
                             setMState(true);
                         }}
                     >
-                        Signin
+                        Sign in
                     </button>
                 ) : (
                     <div className="farRight">
                         Logged in as : {auth.model?.username}
-                            <button
-                                className="signout"
-                                onClick={() => {
-                                    pb.authStore.clear();
-                                }}
-                            >
-                                Signout
-                            </button>
+                        <button
+                        className="signout"
+                            onClick={() => {
+                                pb.authStore.clear();
+                            }}
+                        >
+                            Sign out
+                        </button>
                     </div>
                 )}
             </div>
