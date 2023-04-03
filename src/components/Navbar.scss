@@ -24,26 +24,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #ffffff;
     .right {
-        button {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-
-            padding: 15px 40px;
-            border: none;
-            transition: Appear 0.2s ease-in-out;
-        }
-        button:hover {
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
+        
+            button {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+    
+                padding: 10px 40px;
+                border: none;
+                transition: Appear 0.2s ease-in-out;
+                max-width: 128px;
+            }
+            button:hover {
+                cursor: pointer;
+                box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+            }
+        
         .farRight {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         .signout {
             padding: 4px 8px;

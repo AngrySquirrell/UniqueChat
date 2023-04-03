@@ -1,5 +1,5 @@
 import { BaseAuthStore } from "pocketbase";
-import { messageData, UserAgent } from "../scripts/globalInterface";
+import { messageData, messageFormat, UserAgent } from "../scripts/globalInterface";
 import Message from "./Message";
 import "./Chat.scss";
 import { createRef, useEffect } from "react";
@@ -11,6 +11,14 @@ interface Props {
 
 const Chat = ({ memory, ua }: Props) => {
     const dummy = createRef<HTMLDivElement>();
+    
+    const reverseMemory = (memory:messageData[])=> {
+        let reversedMemory: messageData[] = [];
+        memory.map((el) => {
+            reversedMemory.unshift(el);
+        });
+        return reversedMemory;
+    };
 
     useEffect(() => {
         dummy.current?.scrollIntoView({block:'end', behavior: "smooth" , inline: 'start' });
@@ -27,13 +35,12 @@ const Chat = ({ memory, ua }: Props) => {
                 document.body.style.overflow = "auto";
             }}
         >
-            {memory.map((el, id) => {
+            {reverseMemory(memory).map((el, id) => {
                 return (
                     <Message
                         isAuthor={ua.id === el.authorID ? "right" : "left"}
                         key={id}
                         messageData={el}
-                        ua={ua}
                     />
                 );
             })}

@@ -20,9 +20,7 @@ function App() {
         records: memory,
         invalidate,
         loading,
-    } = useCollection<messageFormat>(collection, [], { realtime: true });
-
-    console.log(memory);
+    } = useCollection<messageFormat>(collection, [], {queryParams:{sort:'-created'}, realtime: true });
 
     useEffect(() => {
         !id && setID(`${crypto.getRandomValues(new Uint32Array(1))[0]}`);

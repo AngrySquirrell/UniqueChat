@@ -9,8 +9,7 @@ interface Props {
     auth: BaseAuthStore;
 }
 
-const Navbar = ({auth}:Props) => {
-    
+const Navbar = ({ auth }: Props) => {
     const [mState, setMState] = useState<boolean>(false);
 
     return (
@@ -28,14 +27,14 @@ const Navbar = ({auth}:Props) => {
                 ) : (
                     <div className="farRight">
                         Logged in as : {auth.model?.username}
-                        <button
-                        className="signout"
-                            onClick={() => {
-                                pb.authStore.clear();
-                            }}
-                        >
-                            Signout
-                        </button>
+                            <button
+                                className="signout"
+                                onClick={() => {
+                                    pb.authStore.clear();
+                                }}
+                            >
+                                Signout
+                            </button>
                     </div>
                 )}
             </div>

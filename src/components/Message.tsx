@@ -4,7 +4,7 @@ import { messageData, UserAgent } from '../scripts/globalInterface';
 
 
 
- const Message = ({isAuthor, messageData, ua}: {isAuthor:string ,messageData:messageData, ua:UserAgent}) => {
+ const Message = ({isAuthor, messageData}: {isAuthor:string ,messageData:messageData}) => {
     return (
         <div className={'message ' + isAuthor }>
             <div className='author'>
