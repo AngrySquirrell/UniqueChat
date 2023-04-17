@@ -35,7 +35,8 @@ const Chat = ({ memory, ua }: Props) => {
                 document.body.style.overflow = "auto";
             }}
         >
-            {reverseMemory(memory).map((el, id) => {
+            <div ref={dummy} className="dummy"></div>
+            {memory.map((el, id) => {
                 return (
                     <Message
                         isAuthor={ua.id === el.authorID ? "right" : "left"}
@@ -44,7 +45,6 @@ const Chat = ({ memory, ua }: Props) => {
                     />
                 );
             })}
-            <div ref={dummy} className="dummy"></div>
         </div>
     );
 };
